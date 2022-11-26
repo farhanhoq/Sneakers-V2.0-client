@@ -12,13 +12,11 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const handleSignUp = data => {
-        // console.log(data)
         createUser(data.email, data.password)
             .then(res => {
                 const user = res.user;
-                console.log(user)
-                toast("User Created Successfully");
                 navigate('/');
+                toast("User Created Successfully");
                 const userInfo = {
                     displayName: data.name
                 }
@@ -46,6 +44,20 @@ const SignUp = () => {
                             })}
                             className="input input-bordered w-full"
                         />
+                        {errors.name && <p className='text-error' role="alert">{errors.name?.message}</p>}
+                    </div>
+
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text text-black">User Type</span>
+                        </label>
+                        <select type="text"
+                            {...register('type')}
+                            className="input input-bordered w-full"
+                        >
+                            <option>Buyer</option>
+                            <option>Seller</option>
+                        </select>
                         {errors.name && <p className='text-error' role="alert">{errors.name?.message}</p>}
                     </div>
 

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 import { useForm } from "react-hook-form";
 
@@ -8,6 +8,9 @@ const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { signIn, googleSignIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState("");
+
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     const navigate = useNavigate();
 
     const handleLogin = data => {
@@ -16,7 +19,7 @@ const Login = () => {
         signIn(data.email, data.password)
             .then(res => {
                 const user = res.user;
-                navigate('/');
+                navigate(from, { replace: true });
             })
             .catch(err => {
                 setLoginError(err.message);
