@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
+import useRole from '../hooks/useRole';
 
 const Nav = () => {
 
     const { user, setUser, logOut } = useContext(AuthContext);
-    console.log(user)
+    const [isRole] = useRole(user?.email);
     const navigate = useNavigate();
 
     const handleLogOut = () => {
@@ -29,9 +30,25 @@ const Nav = () => {
                     
                     <li><Link to="">Item 3</Link></li>
                     {
-                user?.uid ?
+                    user?.uid ?
                         <>
-                            <li><Link to="">Dashboard</Link></li>
+                            <li tabIndex={0}>
+                                <Link to="">Dashboard<svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg></Link>
+                                <ul className="p-2 bg-red-600">
+                                    {
+                                    isRole === "Seller" && 
+                                        <>
+                                            <li><Link to="">Add a product</Link></li>
+                                            <li><Link to="">My Products</Link></li>
+                                            <li><Link to="">My Buyers</Link></li>
+                                        </>
+                                    }
+                                    {
+                                    isRole === "Buyer" && 
+                                        <li><Link to="">My Orders</Link></li>
+                                    }
+                                </ul>
+                            </li>
                             <li><Link className="btn btn-secondary" to='/login' onClick={handleLogOut}>Log Out</Link></li>
                         </>
                         :
