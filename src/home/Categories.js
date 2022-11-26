@@ -1,6 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { useQuery } from "@tanstack/react-query";
+import Loading from '../shared/Loading';
 
 const Categories = () => {
+
+    const { data: categories, isLoading } = useQuery({
+        queryKey: ['categories'],
+        queryFn: async () => {
+            const res = await fetch("http://localhost:5001/categories");
+            const data = await res.json();
+            return data;
+        }
+    })
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
     return (
             <div className="">
                 <table className="table w-full bg-red-800">
@@ -13,12 +30,11 @@ const Categories = () => {
                     </thead>
 
                     <tbody>
-                        <tr>Cy Ganderton</tr>
-                        <tr>Cy Ganderton</tr>
-                        <tr>Cy Ganderton</tr>
-                        <tr>Cy Ganderton</tr>
-                        <tr>Cy Ganderton</tr>
-                        <tr>Cy Ganderton</tr>
+                        {
+                        categories.map(category => 
+                            <tr key={category._id}><Link to={`/categories/${category.c_ID}`}>{category.categoryName}</Link></tr>
+                            )
+                        }
                     </tbody>
 
                 </table>

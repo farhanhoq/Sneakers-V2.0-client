@@ -1,0 +1,49 @@
+
+[
+    {
+        "pname": "Jordan",
+        "cname": "Adidas",
+        "location": "jekhane khusi",
+        "used": "2 years",
+        "bprice": 12000,
+        "sprice": 5500,
+        "sname": "farhan"
+    },
+    {
+        "pname": "Jordan",
+        "cname": "Nike",
+        "location": "jekhane khusi",
+        "used": "2 years",
+        "bprice": 12000,
+        "sprice": 5500,
+        "sname": "farhan"
+    },
+    {
+        "pname": "Jordan",
+        "cname": "Adidas",
+        "location": "jekhane khusi",
+        "used": "2 years",
+        "bprice": 12000,
+        "sprice": 5500,
+        "sname": "farhan"
+    },
+    {
+        "pname": "Jordan",
+        "cname": "Jordan",
+        "location": "jekhane khusi",
+        "used": "2 years",
+        "bprice": 12000,
+        "sprice": 5500,
+        "sname": "farhan"
+    },
+    {
+        "category-name": "Adidas"
+    },
+    {
+        "category-name": "Adidas"
+    },
+    {
+        "category-name": "Adidas"
+    }
+    
+]
