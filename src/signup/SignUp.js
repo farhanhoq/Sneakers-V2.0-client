@@ -12,19 +12,36 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const handleSignUp = data => {
-        createUser(data.email, data.password)
+        console.log(data)
+        createUser(data.email, data.password, data.role)
             .then(res => {
                 const user = res.user;
                 navigate('/');
                 toast("User Created Successfully");
                 const userInfo = {
-                    displayName: data.name
+                    displayName: data.name,
+                    role: data.role
                 }
                 updateUser(userInfo)
-                    .then(() => { })
+                    .then(() => { 
+                        saveUser(data.name, data.email, data.role)
+                    })
                     .catch(err => console.error(err))
             })
             .catch(err => setSignUpError(err.message))
+    }
+
+    const saveUser = (name, email, role) => {
+        const user = { name, email, role };
+        fetch("http://localhost:5001/users", {
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {})
     }
 
     return (
@@ -52,13 +69,12 @@ const SignUp = () => {
                             <span className="label-text text-black">User Type</span>
                         </label>
                         <select type="text"
-                            {...register('type')}
+                            {...register('role')}
                             className="input input-bordered w-full"
                         >
                             <option>Buyer</option>
                             <option>Seller</option>
                         </select>
-                        {errors.name && <p className='text-error' role="alert">{errors.name?.message}</p>}
                     </div>
 
                     <div className="form-control w-full">

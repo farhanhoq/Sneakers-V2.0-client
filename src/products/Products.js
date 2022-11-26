@@ -7,8 +7,6 @@ const Products = () => {
 
     const products = useLoaderData();
 
-    console.log(products)
-
     return (
         <div>
             {

@@ -29,8 +29,11 @@ const Nav = () => {
                     
                     <li><Link to="">Item 3</Link></li>
                     {
-                        user?.uid ?
-                        <li><Link className="btn btn-secondary" to='/login' onClick={handleLogOut}>Log Out</Link></li>
+                user?.uid ?
+                        <>
+                            <li><Link to="">Dashboard</Link></li>
+                            <li><Link className="btn btn-secondary" to='/login' onClick={handleLogOut}>Log Out</Link></li>
+                        </>
                         :
                         <li><Link className="btn btn-secondary" to='/login'>Login</Link></li>
                     }
