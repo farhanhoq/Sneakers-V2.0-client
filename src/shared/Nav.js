@@ -38,8 +38,8 @@ const Nav = () => {
                                     {
                                     isRole === "Seller" && 
                                         <>
-                                            <li><Link to="">Add a product</Link></li>
-                                            <li><Link to="">My Products</Link></li>
+                                            <li><Link to="/addproduct">Add a product</Link></li>
+                                            <li><Link to="/myproducts">My Products</Link></li>
                                             <li><Link to="">My Buyers</Link></li>
                                         </>
                                     }
