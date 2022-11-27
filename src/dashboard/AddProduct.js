@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import Loading from '../shared/Loading';
 import toast from "react-hot-toast";
+import { AuthContext } from '../context/AuthProvider';
 
 const AddProduct = () => {
+
+    const {user} = useContext(AuthContext)
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 
@@ -36,6 +39,7 @@ const AddProduct = () => {
             .then(imgData => {
                 if (imgData.success) {
                     const product = {
+                        email: data.email,
                         pname: data.pname,
                         sprice: data.sprice,
                         pprice: data.pprice,
@@ -75,6 +79,21 @@ const AddProduct = () => {
 
             <form onSubmit={handleSubmit(handleAddProduct)}>
 
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text text-black">Seller Name</span>
+                        </label>
+                        <input type="text"
+                            {...register('email', {
+                                required: "Your Email"
+                            })}
+                            defaultValue={user?.email}
+                            className="input input-bordered w-full"
+                            readOnly
+                        />
+                        {errors.email && <p className='text-error' role="alert">{errors.email?.message}</p>}
+                    </div>
+                    
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text text-black">Product Name</span>
@@ -213,7 +232,7 @@ const AddProduct = () => {
                         {errors.img && <p className='text-error' role="alert">{errors.img?.message}</p>}
                     </div>
 
-                    <input type="submit" className='btn btn-accent w-full text-white' value="Add Doctor" />
+                    <input type="submit" className='btn btn-accent w-full text-white' value="Add Product" />
                 </form>
         </div>
     );

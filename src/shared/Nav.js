@@ -47,6 +47,13 @@ const Nav = () => {
                                     isRole === "Buyer" && 
                                         <li><Link to="">My Orders</Link></li>
                                     }
+                                    {
+                                    isRole === "Admin" && 
+                                        <>
+                                        <li><Link to="/allbuyers">All Buyers</Link></li>
+                                        <li><Link to="allsellers">All Sellers</Link></li>
+                                        </>
+                                    }
                                 </ul>
                             </li>
                             <li><Link className="btn btn-secondary" to='/login' onClick={handleLogOut}>Log Out</Link></li>
