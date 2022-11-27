@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import toast from 'react-hot-toast';
 
-const BookingModal = ({product}) => {
+const BookingModal = ({product, setProduct}) => {
 
     const { user } = useContext(AuthContext);
-    const { pname, sprice } = product;
+    const { pname, sprice, _id } = product;
 
     const handleBooking = e => {
         e.preventDefault();
@@ -18,6 +18,7 @@ const BookingModal = ({product}) => {
         const address = form.address.value;
 
         const booking = {
+            product_id : _id,
             pname,
             sprice,
             cname,
@@ -37,6 +38,7 @@ const BookingModal = ({product}) => {
             .then(data => {
                 console.log(data);
                 if (data.acknowledged) {
+                    setProduct(null);
                     toast.success("Booking Confirmed");
                 } else {
                     toast.error(data.message)

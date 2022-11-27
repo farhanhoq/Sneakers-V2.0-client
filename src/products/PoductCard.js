@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from "@tanstack/react-query";
 import Loading from '../shared/Loading';
 
-const PoductCard = ({ product }) => {
+const PoductCard = ({ product, setProduct }) => {
 
     return (
         <div className='grid grid-cols-3 gap-6'>
@@ -14,7 +14,7 @@ const PoductCard = ({ product }) => {
                     <h2 className="card-title">{product.pname}</h2>
                     <p>{product.location}</p>
                     <div className="card-actions justify-end">
-                        <label htmlFor="booking-modal" className="btn btn-primary text-white">Book Now</label>
+                        <label onClick={() => setProduct(product)} htmlFor="booking-modal" className="btn btn-primary text-white">Book Now</label>
                     </div>
                 </div>
             </div>

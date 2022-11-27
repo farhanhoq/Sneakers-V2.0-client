@@ -41,6 +41,7 @@ const AddProduct = () => {
                     const product = {
                         email: data.email,
                         pname: data.pname,
+                        c_ID: data.c_ID,
                         sprice: data.sprice,
                         pprice: data.pprice,
                         year: data.year,
@@ -49,7 +50,8 @@ const AddProduct = () => {
                         location: data.location,
                         category: data.category,
                         description: data.description,
-                        image: imgData.data.url
+                        image: imgData.data.url,
+                        status: "Available"
                     }
 
                     fetch("http://localhost:5001/products", {
@@ -76,12 +78,15 @@ const AddProduct = () => {
     return (
         <div className='w-96 p-6 mx-auto bg-white'>
             <p className='text-5xl text-center text-primary my-20'>Add a New Product</p>
+            <p className='text-sm text-center text-primary'>For Adidas select category id 01</p>
+            <p className='text-sm text-center text-primary'>For Jordan select category id 02</p>
+            <p className='text-sm text-center text-primary'>For Nike select category id 03</p>
 
             <form onSubmit={handleSubmit(handleAddProduct)}>
 
                     <div className="form-control w-full">
                         <label className="label">
-                            <span className="label-text text-black">Seller Name</span>
+                            <span className="label-text text-black">Seller Email</span>
                         </label>
                         <input type="text"
                             {...register('email', {
@@ -106,7 +111,36 @@ const AddProduct = () => {
                         />
                         {errors.name && <p className='text-error' role="alert">{errors.name?.message}</p>}
                     </div>
+                    
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text text-black">Category ID</span>
+                        </label>
+                    </div>
 
+                    <select
+                        {...register('c_ID')}
+                        className="select input-bordered w-full max-w-xs">
+                            <option>01</option>
+                            <option>02</option>
+                            <option>03</option>
+                    </select>
+
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text text-black">Category</span>
+                        </label>
+                    </div>
+
+                    <select
+                        {...register('category')}
+                        className="select input-bordered w-full max-w-xs">
+                            {
+                            categories.map(category => 
+                                <option key={category._id} value={category.categoryName}>{category.categoryName}</option>)
+                            }
+                    </select>
+                    
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text text-black">Price</span>
@@ -191,20 +225,6 @@ const AddProduct = () => {
                             <option>Sylhet</option>
                     </select>
                     
-                    <div className="form-control w-full">
-                        <label className="label">
-                            <span className="label-text text-black">Category</span>
-                        </label>
-                    </div>
-
-                    <select
-                        {...register('category')}
-                        className="select input-bordered w-full max-w-xs">
-                            {
-                            categories.map(category => 
-                                <option key={category._id} value={category.categoryName}>{category.categoryName}</option>)
-                            }
-                    </select>
                     
                     <div className="form-control w-full">
                         <label className="label">

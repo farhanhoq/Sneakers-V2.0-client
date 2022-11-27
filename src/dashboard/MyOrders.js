@@ -2,16 +2,14 @@ import React, { useContext } from 'react';
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from '../context/AuthProvider';
 import toast from "react-hot-toast";
-import Loading from '../shared/Loading';
 
-const MyProducts = () => {
-
+const MyOrders = () => {
     const { user } = useContext(AuthContext);
 
-    const { data: products = [], isLoading, refetch } = useQuery({
-        queryKey: ['products'],
+    const { data: bookings = [], isLoading, refetch } = useQuery({
+        queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5001/products?email=${user?.email}`, {
+            const res = await fetch(`http://localhost:5001/bookings?email=${user?.email}`, {
                 // headers: {
                 //     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 // }
@@ -21,24 +19,20 @@ const MyProducts = () => {
         }
     })
 
-    const handleDeleteProduct = product => {
-        fetch(`http://localhost:5001/products/${product._id}`, {
-            method: 'DELETE',
-            // headers: {
-            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-            // }
+    const handlePayment = id => {
+        fetch(`http://localhost:5001/products/${id}`, {
+            method: 'put',
+            headers: {
+                // authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
                 if (data.deleteCount > 0) {
-                    toast.success(`Doctor ${product.name} has been removed.`)
+                    toast.success(`Payment Done`)
                     refetch();
                 }
             })
-    }
-
-    if (isLoading) {
-        return <Loading></Loading>
     }
 
     return (
@@ -51,36 +45,21 @@ const MyProducts = () => {
                 <tr>
                     <th></th>
                     <th>Name</th>
-                    <th>Purchase Price</th>
-                    <th>Selling Price</th>
-                    <th>Staus</th>
+                    <th>Price</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                         
                     {
-                        products?.map((product, index) => 
+                        bookings?.map((booking, index) => 
                             <tr>
                                 <th>{index+1}</th>
-                                <td>{product.pname}</td>
-                                <td>{product.pprice}</td>
-                                <td>{product.sprice}</td>
-                                {
-                                    product.status === "Sold" ?
-                                    <td>Sold</td>
-                                    :
-                                    <td>Available</td>
-                                }
+                                <td>{booking.pname}</td>
+                                <td>{booking.sprice}</td>
                                 <td>
-                                    <label onClick={() => handleDeleteProduct(product)}  className="btn btn-sm">X</label>
+                                    <label onClick={() => handlePayment(booking.product_id)} className="btn btn-sm">Pay</label>
                                 </td>
-                                {
-                                    product.status === "Available" &&
-                                    <td>
-                                        <label className="btn btn-sm">Advertise</label>
-                                    </td>
-                                }
                                 {/* <td>
                                     {
                                         booking.price && !booking.paid && 
@@ -101,4 +80,4 @@ const MyProducts = () => {
     );
 };
 
-export default MyProducts;
+export default MyOrders;
