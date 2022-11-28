@@ -11,7 +11,7 @@ const MyProducts = () => {
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5001/products/${user?.email}`, {
+            const res = await fetch(`http://localhost:5001/products?email=${user?.email}`, {
                 // headers: {
                 //     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 // }
@@ -38,7 +38,7 @@ const MyProducts = () => {
     }
 
     const handleAdvertise = id => {
-        fetch(`http://localhost:5001/products/${id}`, {
+        fetch(`http://localhost:5001/allproducts/${id}`, {
             method: 'PUT',
             headers: {
                 // authorization: `bearer ${localStorage.getItem('accessToken')}`

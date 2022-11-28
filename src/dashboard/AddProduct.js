@@ -54,7 +54,7 @@ const AddProduct = () => {
                         status: "Available"
                     }
 
-                    fetch("http://localhost:5001/products", {
+                    fetch("http://localhost:5001/allproducts", {
                     
                         method: 'POST',
                         headers: {

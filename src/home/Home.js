@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Advertise from './Advertise';
 import Banner from './Banner';
 import Categories from './Categories';
 import ContactUs from './ContactUs';
 
 const Home = () => {
+
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
     return (
         <div>
             <Banner></Banner>

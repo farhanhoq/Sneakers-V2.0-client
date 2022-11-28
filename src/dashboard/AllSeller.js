@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { useQuery } from "@tanstack/react-query";
 import Loading from '../shared/Loading';
-import { AuthContext } from '../context/AuthProvider';
 import toast from "react-hot-toast";
 
 const AllSeller = () => {
@@ -37,6 +36,22 @@ const AllSeller = () => {
             })
     }
 
+    const handleVerifySeller = user => {
+        fetch(`http://localhost:5001/users/${user._id}`, {
+            method: 'PUT',
+            headers: {
+                // authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deleteCount > 0) {
+                    toast.success(`Advertise Done`)
+                    refetch();
+                }
+            })
+    }
+
     if (isLoading) {
         return <Loading></Loading>
     }
@@ -52,7 +67,7 @@ const AllSeller = () => {
                         <th></th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Speciality</th>
+                        <th></th>
                         <th></th>
                     </tr>
                     </thead>
@@ -67,6 +82,16 @@ const AllSeller = () => {
                                         <th>{i+1}</th>
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
+                                        {
+                                            user.isVerified ? 
+                                                <td>
+                                                    <label className="btn btn-sm">Verified</label>
+                                                </td>
+                                                :
+                                                <td>
+                                                    <label onClick={() => handleVerifySeller(user)} className="btn btn-sm">Verify</label>
+                                                </td>
+                                        }
                                         <td>
                                             <label onClick={() => handleDeleteUser(user)} className="btn btn-sm">X</label>
                                         </td>

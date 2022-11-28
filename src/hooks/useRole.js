@@ -14,7 +14,7 @@ const useRole = email => {
                 })
             }
     }, [email])
-    return[isRole, setIsRole]
+    return[isRole, isRoleLoading]
 }
 
 export default useRole;
