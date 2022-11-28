@@ -22,7 +22,7 @@ const MyProducts = () => {
     })
 
     const handleDeleteProduct = product => {
-        fetch(`http://localhost:5001/products/${product._id}`, {
+        fetch(`http://localhost:5001/allproducts/${product._id}`, {
             method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -38,7 +38,7 @@ const MyProducts = () => {
     }
 
     const handleAdvertise = id => {
-        fetch(`http://localhost:5001/allproducts/${id}`, {
+        fetch(`http://localhost:5001/allproducts/advertise/${id}`, {
             method: 'PUT',
             headers: {
                 // authorization: `bearer ${localStorage.getItem('accessToken')}`

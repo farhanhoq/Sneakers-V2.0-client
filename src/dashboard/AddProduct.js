@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Loading from '../shared/Loading';
 import toast from "react-hot-toast";
 import { AuthContext } from '../context/AuthProvider';
+import {format} from 'date-fns'
 
 const AddProduct = () => {
 
@@ -15,6 +16,8 @@ const AddProduct = () => {
     const imageHostKey = process.env.REACT_APP_bb_key;
 
     const navigate = useNavigate();
+
+    const date = format(new Date, 'dd/MM/yy');
 
     const { data: categories, isLoading} = useQuery({
         queryKey: ['cateogry'],
@@ -39,6 +42,8 @@ const AddProduct = () => {
             .then(imgData => {
                 if (imgData.success) {
                     const product = {
+                        pdate: data.pdate,
+                        sname: data.sname,
                         email: data.email,
                         pname: data.pname,
                         c_ID: data.c_ID,
@@ -84,6 +89,36 @@ const AddProduct = () => {
 
             <form onSubmit={handleSubmit(handleAddProduct)}>
 
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text text-black">Posting Date</span>
+                        </label>
+                        <input type="text"
+                            {...register('pdate', {
+                                required: "Date"
+                            })}
+                            defaultValue={date}
+                            className="input input-bordered w-full"
+                            readOnly
+                        />
+                        {errors.pdate && <p className='text-error' role="alert">{errors.pdate?.message}</p>}
+                    </div>
+                    
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text text-black">Seller Name</span>
+                        </label>
+                        <input type="text"
+                            {...register('sname', {
+                                required: "Your Email"
+                            })}
+                            defaultValue={user?.displayName}
+                            className="input input-bordered w-full"
+                            readOnly
+                        />
+                        {errors.sname && <p className='text-error' role="alert">{errors.sname?.message}</p>}
+                    </div>
+                    
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text text-black">Seller Email</span>

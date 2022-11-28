@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import PageNotFound from "../404/PageNotFound";
 import AddProduct from "../dashboard/AddProduct";
 import AllBuyer from "../dashboard/AllBuyer";
 import AllSeller from "../dashboard/AllSeller";
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
             {
                 path: '/myorders',
                 element: <MyOrders></MyOrders>
+            },
+            {
+                path: '*',
+                element: <PageNotFound></PageNotFound>
             },
         ]
     }

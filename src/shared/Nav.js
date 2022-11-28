@@ -28,7 +28,7 @@ const Nav = () => {
                         </ul>
                     </li>
                     
-                    <li><Link to="">Item 3</Link></li>
+                    <li><Link to="/blogs">Blogs</Link></li>
                     {
                     user?.uid ?
                         <>
