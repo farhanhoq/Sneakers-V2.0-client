@@ -22,10 +22,7 @@ const AllSeller = () => {
 
     const handleDeleteUser = user => {
         fetch(`http://localhost:5001/users/${user._id}`, {
-            method: 'DELETE',
-            // headers: {
-            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-            // }
+            method: 'DELETE'
         })
             .then(res => res.json())
             .then(data => {
@@ -38,10 +35,7 @@ const AllSeller = () => {
 
     const handleVerifySeller = user => {
         fetch(`http://localhost:5001/users/${user._id}`, {
-            method: 'PUT',
-            headers: {
-                // authorization: `bearer ${localStorage.getItem('accessToken')}`
-            }
+            method: 'PUT'
         })
             .then(res => res.json())
             .then(data => {

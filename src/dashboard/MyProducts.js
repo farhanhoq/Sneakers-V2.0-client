@@ -11,11 +11,7 @@ const MyProducts = () => {
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5001/products?email=${user?.email}`, {
-                // headers: {
-                //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-                // }
-            });
+            const res = await fetch(`http://localhost:5001/products?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -23,10 +19,7 @@ const MyProducts = () => {
 
     const handleDeleteProduct = product => {
         fetch(`http://localhost:5001/allproducts/${product._id}`, {
-            method: 'DELETE',
-            // headers: {
-            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-            // }
+            method: 'DELETE'
         })
             .then(res => res.json())
             .then(data => {
@@ -39,10 +32,7 @@ const MyProducts = () => {
 
     const handleAdvertise = id => {
         fetch(`http://localhost:5001/allproducts/advertise/${id}`, {
-            method: 'PUT',
-            headers: {
-                // authorization: `bearer ${localStorage.getItem('accessToken')}`
-            }
+            method: 'PUT'
         })
             .then(res => res.json())
             .then(data => {

@@ -9,11 +9,7 @@ const MyOrders = () => {
     const { data: bookings = [], isLoading, refetch } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5001/bookings?email=${user?.email}`, {
-                // headers: {
-                //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-                // }
-            });
+            const res = await fetch(`http://localhost:5001/bookings?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -23,7 +19,7 @@ const MyOrders = () => {
         fetch(`http://localhost:5001/allproducts/status/${id}`, {
             method: 'PUT',
             headers: {
-                // authorization: `bearer ${localStorage.getItem('accessToken')}`
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
         })
             .then(res => res.json())
@@ -44,6 +40,7 @@ const MyOrders = () => {
                 <thead>
                 <tr>
                     <th></th>
+                    <th>Image</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th></th>
@@ -55,6 +52,7 @@ const MyOrders = () => {
                         bookings?.map((booking, index) => 
                             <tr>
                                 <th>{index+1}</th>
+                                <td><img src={ booking.image} alt="" className='w-24'/></td>
                                 <td>{booking.pname}</td>
                                 <td>{booking.sprice}</td>
                                 <td>

@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 const BookingModal = ({product, setProduct}) => {
 
     const { user } = useContext(AuthContext);
-    const { pname, sprice, _id } = product;
+    const { pname, sprice, _id, image } = product;
 
     const handleBooking = e => {
         e.preventDefault();
@@ -24,7 +24,8 @@ const BookingModal = ({product, setProduct}) => {
             cname,
             email,
             phone,
-            address
+            address,
+            image
         }
 
         fetch("http://localhost:5001/bookings", {
@@ -55,6 +56,7 @@ const BookingModal = ({product, setProduct}) => {
                     <h3 className="text-lg font-bold text-center">{pname}</h3>
                     <h3 className="text-lg font-bold text-center">Selling Price: {sprice}</h3>
                     <form className='grid grid-cols-1 gap-3 mt-12' onSubmit={handleBooking}>
+                        <img name="image" src={image} alt="" className="input input-bordered w-full" defaultValue={pname} readOnly/>
                         <input name="pname" placeholder="Your Name" className="input input-bordered w-full" defaultValue={pname} readOnly/>
                         <input name="sprice" placeholder="Your Name" className="input input-bordered w-full" defaultValue={sprice} readOnly/>
                         <input name="cname" placeholder="Your Name" className="input input-bordered w-full" defaultValue={user?.displayName} readOnly/>
