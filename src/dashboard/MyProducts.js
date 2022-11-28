@@ -48,10 +48,10 @@ const MyProducts = () => {
     }
 
     return (
-        <div>
-            <p className='text-5xl text-center text-primary my-20'>My Appointments</p>
+        <div className='text-red-600 my-20'>
+            <p className='text-5xl text-center my-20'>My Products</p>
             <div className="overflow-x-auto">
-            <table className="table w-5/6 text-primary mx-auto">
+            <table className="table w-5/6 mx-auto">
                 
                 <thead>
                 <tr>
@@ -79,24 +79,14 @@ const MyProducts = () => {
                                     <td>Available</td>
                                 }
                                 <td>
-                                    <label onClick={() => handleDeleteProduct(product)}  className="btn btn-sm">X</label>
+                                    <label onClick={() => handleDeleteProduct(product)}  className="btn btn-sm bg-red-600" bg-red-600>X</label>
                                 </td>
                                 {
                                     product.status === "Available" &&
                                     <td>
-                                        <label onClick={() => handleAdvertise(product._id)} className="btn btn-sm">Advertise</label>
+                                        <label onClick={() => handleAdvertise(product._id)} className="btn btn-sm bg-red-600">Advertise</label>
                                     </td>
                                 }
-                                {/* <td>
-                                    {
-                                        booking.price && !booking.paid && 
-                                        <Link to={`/dashboard/payment/${booking._id}`}><button className='btn btn-primary btn-sm'>Pay</button></Link>
-                                    }
-                                    {
-                                        booking.price && booking.paid && 
-                                        <button className='btn btn-primary'>{booking.price}</button>
-                                    }
-                                </td> */}
                             </tr>
                         )
                     }

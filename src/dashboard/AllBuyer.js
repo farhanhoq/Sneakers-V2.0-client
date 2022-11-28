@@ -38,10 +38,10 @@ const AllBuyer = () => {
     }
 
     return (
-        <div>
-            <h2 className='text-5xl text-center text-primary my-20'>Manage Doctors</h2>
+        <div className='my-20'>
+            <h2 className='text-5xl text-center text-red-600 my-20'>All Buyers</h2>
             <div className="overflow-x-auto">
-                <table className="table w-full text-primary text-center">
+                <table className="table w-full text-red-600 text-center">
                     
                     <thead>
                     <tr>
@@ -63,7 +63,7 @@ const AllBuyer = () => {
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
                                         <td>
-                                            <label onClick={() => handleDeleteUser(user)} className="btn btn-sm">X</label>
+                                            <label onClick={() => handleDeleteUser(user)} className="btn btn-sm bg-red-600">X</label>
                                         </td>
                                         </>
                                     }

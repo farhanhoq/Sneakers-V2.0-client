@@ -20,7 +20,7 @@ const Categories = () => {
 
     return (
             <div className="">
-                <table className="table w-full bg-red-800">
+                <table className="table w-full text-center">
 
                     <thead>
                         <tr>

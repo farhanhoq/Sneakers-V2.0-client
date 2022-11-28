@@ -31,7 +31,7 @@ const Nav = () => {
                                 <>
                                     <li><Link to="/addproduct">Add a product</Link></li>
                                     <li><Link to="/myproducts">My Products</Link></li>
-                                    <li><Link to="">My Buyers</Link></li>
+                                    <li><Link to="/mybuyers">My Buyers</Link></li>
                                 </>
                             }
                             {
@@ -42,28 +42,50 @@ const Nav = () => {
                             isRole === "Admin" && 
                                 <>
                                 <li><Link to="/allbuyers">All Buyers</Link></li>
-                                <li><Link to="allsellers">All Sellers</Link></li>
-                                <li><Link to="">Reported Items</Link></li>
+                                <li><Link to="/allsellers">All Sellers</Link></li>
+                                <li><Link to="/reporteditems">Reported Items</Link></li>
                                 </>
                             }
                         </ul>
                     </li>
-                    <li><Link className="btn btn-secondary" to='/login' onClick={handleLogOut}>Log Out</Link></li>
+                    <li><Link className="btn btn-secondary bg-red-600" to='/login' onClick={handleLogOut}>Log Out</Link></li>
                 </>
                 :
-                <li><Link className="btn btn-secondary" to='/login'>Login</Link></li>
+                <li><Link className="btn btn-secondary bg-red-600" to='/login'>Login</Link></li>
                     }
         </React.Fragment>
         );
 
     return (
-        <div className="navbar bg-base-100 mb-20">
-
-            <div className="flex-1">
-                <Link to="/" className="btn btn-ghost normal-case text-xl">Sneakers v2.0</Link>
+        <div className="navbar bg-base-100 flex justify-between mb-10">
+            <div className="navbar-start">
+            <div className="dropdown">
+                <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                    />
+                </svg>
+                </label>
+                <ul
+                tabIndex={1}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                {menuItems}
+                </ul>
             </div>
-
-            <div className="flex-none">
+            <Link to='/' className="btn btn-ghost normal-case text-4xl font-bold text-red-600">Sneakers v2.0</Link>
+            </div>
+            <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
                     {menuItems}
                 </ul>

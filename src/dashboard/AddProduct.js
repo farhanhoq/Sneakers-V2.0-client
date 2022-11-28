@@ -81,11 +81,11 @@ const AddProduct = () => {
     }
 
     return (
-        <div className='w-96 p-6 mx-auto bg-white'>
-            <p className='text-5xl text-center text-primary my-20'>Add a New Product</p>
-            <p className='text-sm text-center text-primary'>For Adidas select category id 01</p>
-            <p className='text-sm text-center text-primary'>For Jordan select category id 02</p>
-            <p className='text-sm text-center text-primary'>For Nike select category id 03</p>
+        <div className='w-96 p-6 mx-auto bg-white text-red-600 my-20'>
+            <p className='text-5xl text-center my-20'>Add a New Product</p>
+            <p className='text-sm text-center'>For Adidas select category id 01</p>
+            <p className='text-sm text-center'>For Jordan select category id 02</p>
+            <p className='text-sm text-center'>For Nike select category id 03</p>
 
             <form onSubmit={handleSubmit(handleAddProduct)}>
 
@@ -287,7 +287,7 @@ const AddProduct = () => {
                         {errors.img && <p className='text-error' role="alert">{errors.img?.message}</p>}
                     </div>
 
-                    <input type="submit" className='btn btn-accent w-full text-white' value="Add Product" />
+                    <input type="submit" className='btn bg-red-600 w-full text-white' value="Add Product" />
                 </form>
         </div>
     );

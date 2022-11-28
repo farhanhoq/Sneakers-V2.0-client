@@ -32,10 +32,10 @@ const MyOrders = () => {
     }
 
     return (
-        <div>
-            <p className='text-5xl text-center text-primary my-20'>My Appointments</p>
+        <div className='text-red-600 my-20'>
+            <p className='text-5xl text-center my-20'>My Orders</p>
             <div className="overflow-x-auto">
-            <table className="table w-5/6 text-primary mx-auto">
+            <table className="table w-5/6 mx-auto">
                 
                 <thead>
                 <tr>
@@ -56,7 +56,7 @@ const MyOrders = () => {
                                 <td>{booking.pname}</td>
                                 <td>{booking.sprice}</td>
                                 <td>
-                                    <label onClick={() => handlePayment(booking.product_id)} className="btn btn-sm">Pay</label>
+                                    <label onClick={() => handlePayment(booking.product_id)} className="btn btn-sm bg-red-600">Pay</label>
                                 </td>
                                 {/* <td>
                                     {
