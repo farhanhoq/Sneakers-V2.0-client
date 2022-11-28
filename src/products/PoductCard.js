@@ -12,7 +12,7 @@ const PoductCard = ({ product, setProduct }) => {
         queryKey: ['users'],
         queryFn: async () => {
             try {
-                const res = await fetch("http://localhost:5001/users", {
+                const res = await fetch("https://server-side-lac.vercel.app/users", {
                 });
                 const data = await res.json();
                 return data;

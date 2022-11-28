@@ -22,7 +22,7 @@ const AddProduct = () => {
     const { data: categories, isLoading} = useQuery({
         queryKey: ['cateogry'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5001/categories');
+            const res = await fetch('https://server-side-lac.vercel.app/categories');
             const data = await res.json();
             return data;
         }
@@ -59,7 +59,7 @@ const AddProduct = () => {
                         status: "Available"
                     }
 
-                    fetch("http://localhost:5001/allproducts", {
+                    fetch("https://server-side-lac.vercel.app/allproducts", {
                     
                         method: 'POST',
                         headers: {

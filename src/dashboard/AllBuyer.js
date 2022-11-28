@@ -9,7 +9,7 @@ const AllBuyer = () => {
         queryKey: ['users'],
         queryFn: async () => {
             try {
-                const res = await fetch("http://localhost:5001/users", {
+                const res = await fetch("https://server-side-lac.vercel.app/users", {
                 });
                 const data = await res.json();
                 return data;
@@ -21,7 +21,7 @@ const AllBuyer = () => {
     });
 
     const handleDeleteUser = user => {
-        fetch(`http://localhost:5001/users/${user._id}`, {
+        fetch(`https://server-side-lac.vercel.app/users/${user._id}`, {
             method: 'DELETE',
         })
             .then(res => res.json())

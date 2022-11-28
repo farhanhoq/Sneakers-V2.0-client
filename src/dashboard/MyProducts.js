@@ -11,14 +11,14 @@ const MyProducts = () => {
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5001/products?email=${user?.email}`);
+            const res = await fetch(`https://server-side-lac.vercel.app/products?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
     })
 
     const handleDeleteProduct = product => {
-        fetch(`http://localhost:5001/allproducts/${product._id}`, {
+        fetch(`https://server-side-lac.vercel.app/allproducts/${product._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -31,7 +31,7 @@ const MyProducts = () => {
     }
 
     const handleAdvertise = id => {
-        fetch(`http://localhost:5001/allproducts/advertise/${id}`, {
+        fetch(`https://server-side-lac.vercel.app/allproducts/advertise/${id}`, {
             method: 'PUT'
         })
             .then(res => res.json())
