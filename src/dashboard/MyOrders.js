@@ -21,7 +21,7 @@ const MyOrders = () => {
 
     const handlePayment = id => {
         fetch(`http://localhost:5001/products/${id}`, {
-            method: 'put',
+            method: 'PUT',
             headers: {
                 // authorization: `bearer ${localStorage.getItem('accessToken')}`
             }

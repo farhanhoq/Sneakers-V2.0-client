@@ -11,7 +11,7 @@ const MyProducts = () => {
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5001/products?email=${user?.email}`, {
+            const res = await fetch(`http://localhost:5001/products/${user?.email}`, {
                 // headers: {
                 //     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 // }
@@ -32,6 +32,22 @@ const MyProducts = () => {
             .then(data => {
                 if (data.deleteCount > 0) {
                     toast.success(`Doctor ${product.name} has been removed.`)
+                    refetch();
+                }
+            })
+    }
+
+    const handleAdvertise = id => {
+        fetch(`http://localhost:5001/products/${id}`, {
+            method: 'PUT',
+            headers: {
+                // authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deleteCount > 0) {
+                    toast.success(`Advertise Done`)
                     refetch();
                 }
             })
@@ -78,7 +94,7 @@ const MyProducts = () => {
                                 {
                                     product.status === "Available" &&
                                     <td>
-                                        <label className="btn btn-sm">Advertise</label>
+                                        <label onClick={() => handleAdvertise(product._id)} className="btn btn-sm">Advertise</label>
                                     </td>
                                 }
                                 {/* <td>

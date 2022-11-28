@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import { useQuery } from "@tanstack/react-query";
 import Loading from '../shared/Loading';
 import { AuthContext } from '../context/AuthProvider';
+import toast from "react-hot-toast";
 
 const AllSeller = () => {
     
-    const { data: users, isLoading } = useQuery({
+    const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             try {
@@ -19,6 +20,22 @@ const AllSeller = () => {
             }
         }
     });
+
+    const handleDeleteUser = user => {
+        fetch(`http://localhost:5001/users/${user._id}`, {
+            method: 'DELETE',
+            // headers: {
+            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+            // }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deleteCount > 0) {
+                    toast.success(`Buyer ${user.name} has been removed.`)
+                    refetch();
+                }
+            })
+    }
 
     if (isLoading) {
         return <Loading></Loading>
@@ -51,7 +68,7 @@ const AllSeller = () => {
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
                                         <td>
-                                            <label className="btn btn-sm">X</label>
+                                            <label onClick={() => handleDeleteUser(user)} className="btn btn-sm">X</label>
                                         </td>
                                         </>
                                     }
